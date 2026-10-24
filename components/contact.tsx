@@ -4,7 +4,7 @@ import { profile } from "@/data/profile";
 
 export function Contact() {
   const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
-    "Hello from your portfolio",
+    profile.contact.subject,
   )}`;
 
   return (
@@ -18,7 +18,7 @@ export function Contact() {
           className="email-button"
           aria-label={`Email ${profile.name} at ${profile.email}`}
         >
-          Email Gaurav
+          {profile.contact.cta}
         </a>
         <span className="email-address mono">{profile.email}</span>
       </div>

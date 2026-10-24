@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import Script from "next/script";
+import { THEME_STORAGE_KEY, themeColors } from "@/app/theme";
 import { profile } from "@/data/profile";
 import "./globals.css";
 
@@ -57,13 +57,19 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   colorScheme: "dark light",
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0C0D0B" },
-    { media: "(prefers-color-scheme: light)", color: "#F2F1EB" },
-  ],
 };
 
-const themeScript = `(function(){try{var stored=localStorage.getItem("theme");document.documentElement.dataset.theme=stored==="light"?"light":"dark";}catch(error){document.documentElement.dataset.theme="dark";}})();`;
+// Runs as the first script in <body>, before any page content is parsed, so the
+// stored theme paints immediately. next/script's beforeInteractive strategy
+// queues the same code behind the client bundle instead of executing inline.
+// The theme-color meta is created here rather than in the viewport export so
+// React hydration cannot re-insert a stale server colour. The meta is created
+// even when storage access throws, so the chrome still matches the dark default.
+const themeScript = `(function(){var theme="dark";try{theme=localStorage.getItem(${JSON.stringify(
+  THEME_STORAGE_KEY,
+)})==="light"?"light":"dark";}catch(error){}document.documentElement.dataset.theme=theme;var colors=${JSON.stringify(
+  themeColors,
+)};var meta=document.querySelector('meta[name="theme-color"]');if(!meta){meta=document.createElement("meta");meta.setAttribute("name","theme-color");document.head.appendChild(meta);}meta.setAttribute("content",colors[theme]);})();`;
 
 export default function RootLayout({
   children,
@@ -78,9 +84,8 @@ export default function RootLayout({
       className={`${instrumentSans.variable} ${fragmentMono.variable}`}
     >
       <body>
-        <Script
+        <script
           id="theme-init"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: themeScript }}
         />
         <a href="#main-content" className="skip-link">

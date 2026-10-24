@@ -128,13 +128,25 @@ test("theme toggle switches to light and survives a reload", async () => {
       "dark theme should be the default",
     );
 
-    const toggle = page.getByRole("button", { name: /color theme/i });
+    const toggle = page.getByRole("button", { name: /theme/i });
     await toggle.click();
 
     assert.equal(await page.locator("html").getAttribute("data-theme"), "light");
+    assert.equal(await toggle.getAttribute("data-current-theme"), "light");
     assert.equal(
       await page.evaluate(() => localStorage.getItem("theme")),
       "light",
+    );
+
+    const lightChrome = await page
+      .locator('meta[name="theme-color"]')
+      .evaluateAll((metas) =>
+        metas.map((meta) => meta.getAttribute("content")?.toLowerCase()),
+      );
+    assert.ok(lightChrome.length > 0);
+    assert.ok(
+      lightChrome.every((color) => color === "#f2f1eb"),
+      "theme-color metadata should follow the light theme",
     );
 
     // Read the light token itself, then wait for the body to paint it.
@@ -158,13 +170,71 @@ test("theme toggle switches to light and survives a reload", async () => {
       (expected) => getComputedStyle(document.body).backgroundColor === expected,
       lightBackground,
     );
+    await page.waitForFunction(
+      () =>
+        document
+          .querySelector("[data-current-theme]")
+          ?.getAttribute("data-current-theme") === "light",
+    );
+    assert.equal(
+      await page.getByRole("button", { name: /theme/i }).getAttribute(
+        "data-current-theme",
+      ),
+      "light",
+      "the toggle should reflect the restored theme after reload",
+    );
+  } finally {
+    await context.close();
+  }
+});
 
-    const headScripts = await page
-      .locator("head script")
-      .evaluateAll((scripts) => scripts.map((script) => script.textContent ?? ""));
-    assert.ok(
-      headScripts.some((content) => content.includes("localStorage")),
-      "theme should be restored by an inline head script before paint",
+test("saved theme is restored by an inline script before content", async () => {
+  const html = await (await fetch(BASE_URL)).text();
+  const scriptIndex = html.indexOf('id="theme-init"');
+  const mainIndex = html.indexOf("<main");
+
+  assert.ok(scriptIndex > -1, "theme-init script should exist in the document");
+  assert.ok(
+    scriptIndex < mainIndex,
+    "theme-init must appear before page content",
+  );
+  assert.match(
+    html.slice(scriptIndex, scriptIndex + 800),
+    /localStorage\.getItem/,
+    "theme-init should read the stored theme",
+  );
+  assert.doesNotMatch(
+    html,
+    /self\.__next_s[^<]*theme-init/,
+    "theme bootstrap must not be queued behind the client bundle",
+  );
+
+  const context = await browser.newContext();
+  try {
+    await context.addInitScript(() => {
+      try {
+        localStorage.setItem("theme", "light");
+      } catch {
+        // The assertion below reports the failure.
+      }
+
+      window.__firstFrameTheme = null;
+      requestAnimationFrame(function capture() {
+        const theme = document.documentElement.dataset.theme;
+        if (theme) {
+          window.__firstFrameTheme = theme;
+          return;
+        }
+        requestAnimationFrame(capture);
+      });
+    });
+
+    const page = await context.newPage();
+    await page.goto(BASE_URL, { waitUntil: "load" });
+    assert.equal(
+      await page.evaluate(() => window.__firstFrameTheme),
+      "light",
+      "light theme should be on the document by the first painted frame",
     );
   } finally {
     await context.close();
@@ -181,7 +251,7 @@ test("page has landmarks, a skip link and an accessible theme control", async ()
     const skipLink = page.getByRole("link", { name: /skip to content/i });
     assert.equal(await skipLink.getAttribute("href"), "#main-content");
 
-    const toggle = page.getByRole("button", { name: /color theme/i });
+    const toggle = page.getByRole("button", { name: /theme/i });
     assert.ok((await toggle.boundingBox()).width >= 44);
     assert.ok((await toggle.boundingBox()).height >= 44);
   } finally {
@@ -218,9 +288,23 @@ test("technology chips include recognisable icons, not just text", async () => {
 test("contact call to action opens a mail draft", async () => {
   const { context, page } = await openPage();
   try {
-    const emailLink = page.getByRole("link", { name: /email gaurav/i });
+    const emailLink = page.locator("a.email-button");
     assert.match(await emailLink.getAttribute("href"), /^mailto:/);
     assert.ok(await emailLink.isVisible());
+
+    const addresses = await page
+      .locator('a[href^="mailto:"]')
+      .evaluateAll((links) => [
+        ...new Set(
+          links.map((link) =>
+            (link.getAttribute("href") ?? "")
+              .replace(/^mailto:/, "")
+              .split("?")[0],
+          ),
+        ),
+      ]);
+    assert.equal(addresses.length, 1, "all mailto links need one address");
+    assert.match(addresses[0], /^[^@\s]+@[^@\s]+$/);
   } finally {
     await context.close();
   }

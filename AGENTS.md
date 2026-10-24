@@ -41,6 +41,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - `app/layout.tsx` — fonts, theme bootstrap script, shared metadata and viewport.
 - `app/page.tsx` — page composition and Person JSON-LD.
 - `app/globals.css` — Tailwind import, design tokens, base styles, focus, motion.
+- `app/theme.ts` — storage key and palette values shared by the bootstrap and toggle.
 - `components/site-header.tsx` — sticky bar.
 - `components/theme-toggle.tsx` — only client component.
 - `components/section.tsx` — rail + content grid wrapper.
@@ -92,9 +93,10 @@ This version has breaking changes — APIs, conventions, and file structure may 
   - Screenshot dark/light at 360px and 1440px with installed Chrome; inspect spacing, contrast and overflow.
   - Run Lighthouse mobile and fix any measured shortfall below 95.
   - Commit the finished site.
-  - Result: `pnpm lint` clean, `pnpm build` clean, `pnpm test:e2e` 9/9.
-  - Result: Lighthouse mobile 97 performance / 100 accessibility / 100 best practices / 100 SEO; LCP 2.6s, CLS 0.
+  - Result: `pnpm lint` clean, `pnpm build` clean, `pnpm test:e2e` 10/10.
+  - Result: Lighthouse mobile 96–97 performance / 100 accessibility / 100 best practices / 100 SEO; LCP 2.6–2.7s, CLS 0.
   - Result: dark/light screenshots at 360px and 1440px, zero horizontal overflow.
+  - Result: production HTML runs the theme bootstrap inline before page content; first painted frame matches the stored theme.
 
 ## Verification Commands
 
