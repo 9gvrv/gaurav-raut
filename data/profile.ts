@@ -84,7 +84,7 @@ export type Profile = {
   };
 };
 
-const email = "hello@example.com";
+const email = "gauravraut9124@gmail.com";
 
 /**
  * Canonical site origin. Trailing slashes are stripped when the profile is
@@ -94,29 +94,29 @@ const siteUrl = "https://example.com";
 
 export const profile: Profile = {
   name: "Gaurav Raut",
-  handle: "[handle]",
-  role: "Full-stack engineer focused on backend systems and AI.",
+  handle: "[gvrv]",
+  role: "Learning Web Devlopment, Backend, AI.",
   description:
     "Backend and AI engineer building retrieval pipelines, agent runtimes, and the APIs around them.",
-  bio: "I build the parts of AI products that have to hold up in production: retrieval pipelines, agent runtimes, and the APIs around them. My work sits mostly in Python, TypeScript, and the infrastructure that keeps both honest. I care about systems that stay legible when they fail.",
-  location: "[City, Country]",
+  bio: "I'm a developer learning by building things, exploring new technologies, and figuring out how software works under the hood. I work across web development, backend systems, and AI, with a focus on understanding the fundamentals rather than just making things work. Most of what I know comes from experimenting, solving problems, and being curious about what I don't know yet.",
+  location: "[Mumbai, India]",
   email,
   siteUrl: siteUrl.replace(/\/+$/, ""),
-  now: "Currently building [PLACEHOLDER], and spending most of my time on agent evaluation, retrieval quality, and tool-use reliability.",
+  now: "Currently building Ragnest, and spending most of my time on adding features that probably nobody use.",
   socials: [
     {
       label: "GitHub",
-      href: "https://github.com/[handle]",
+      href: "https://github.com/9gvrv",
       icon: "github",
     },
     {
       label: "LinkedIn",
-      href: "https://www.linkedin.com/in/[handle]",
+      href: "https://www.linkedin.com/in/gaurav111",
       icon: "linkedin",
     },
     {
       label: "X",
-      href: "https://x.com/[handle]",
+      href: "https://x.com/slopsoap",
       icon: "x",
     },
     {
@@ -162,72 +162,72 @@ export const profile: Profile = {
   ],
   projects: [
     {
-      title: "[PROJECT 01] Agent runtime",
+      title: "[RAGNEST] A Multi-Tenant RAG Application",
       year: "[2026]",
-      problem: "Long-running agents needed durable tool calls without losing traceability.",
+      problem: "Finding and extracting relevant information from multiple documents is time-consuming and inefficient.",
       outcome:
-        "[Example outcome] A typed orchestration layer with retries, audit logs, and per-run budgets.",
-      stack: ["Python", "FastAPI", "PostgreSQL", "Redis", "Docker"],
+        "RAGNest lets users upload, organize, and query documents within shared workspaces to get relevant, context-aware answers grounded in their documents.",
+      stack: ["Python", "FastAPI", "PostgreSQL", "TypeScript", "Next.js", "Docker"],
       architecture:
         "FastAPI control plane / worker queue / Postgres event log / MCP tool adapters",
       links: [
         { label: "Live site", href: "https://example.com" },
         {
           label: "Source",
-          href: "https://github.com/[handle]/[repo]",
+          href: "https://github.com/9gvrv/ragnest",
           icon: "github",
         },
       ],
     },
     {
-      title: "[PROJECT 02] Retrieval evaluation harness",
+      title: "[Plana] Application to plan your projects and stuff",
       year: "[2026]",
-      problem: "RAG changes were hard to compare without a repeatable baseline.",
+      problem: "Managing tasks and planning projects can become disorganized without a clear view of tasks, priorities, and progress.",
       outcome:
-        "[Example outcome] A harness that scores retrieval and answer quality across every commit.",
-      stack: ["Python", "PostgreSQL", "pgvector", "Pytest"],
+        "Organize tasks into boards and lists, manage workflows, and plan projects efficiently with drag-and-drop functionality.",
+      stack: ["TypeScript", "Next.js", "Express.js", "PostgreSQL"],
       architecture:
         "Ingest -> chunk -> hybrid retrieval -> judged evals; results stored per commit",
       links: [
         { label: "Live site", href: "https://example.com" },
         {
           label: "Source",
-          href: "https://github.com/[handle]/[repo]",
+          href: "https://github.com/9gvrv/plana",
           icon: "github",
         },
       ],
     },
     {
-      title: "[PROJECT 03] Internal API platform",
+      title: "[UPTIME-MONITOR] Web vitals monitoring",
       year: "[2025]",
-      problem: "Teams kept rebuilding auth, pagination, and rate limits from scratch.",
+      problem: "Manually monitoring API availability and diagnosing downtime is unreliable and time-consuming.",
       outcome:
-        "[Example outcome] One documented service template with shared middleware and typed contracts.",
-      stack: ["TypeScript", "Node.js", "PostgreSQL", "Docker"],
+        "Track URLs, trigger health checks, measure response latency, identify failures, and review historical uptime data.",
+      stack: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy"],
       architecture:
         "Node services behind a typed gateway; OpenAPI as the shared contract",
       links: [
         {
           label: "Source",
-          href: "https://github.com/[handle]/[repo]",
+          href: "https://github.com/9gvrv/uptime-monitor",
           icon: "github",
         },
       ],
     },
     {
-      title: "[PROJECT 04] Operations console",
+      title: "[RESEARCH AGENT] Your fellow research assistant",
       year: "[2025]",
-      problem: "Operators lacked a readable view of [PLACEHOLDER] workflows.",
+      problem: "Researching a topic requires manually searching multiple sources, extracting relevant information, and verifying where the information comes from.",
       outcome:
-        "[Example outcome] A compact Next.js console with server-side data fetching and clear empty states.",
-      stack: ["TypeScript", "Next.js", "React", "Tailwind CSS", "PostgreSQL"],
+        "Research by searching the web when needed, processing relevant sources, and generating structured, LLM-powered answers with citations.",
+      stack: ["Python", "SearXNG", "web scraping", "openai"],
       architecture:
         "Next.js App Router / server components / Postgres read models",
       links: [
         { label: "Live site", href: "https://example.com" },
         {
           label: "Source",
-          href: "https://github.com/[handle]/[repo]",
+          href: "https://github.com/9gvrv/research-agent",
           icon: "github",
         },
       ],
@@ -248,7 +248,7 @@ export const profile: Profile = {
     },
     {
       label: "AI / ML",
-      items: ["RAG", "Agentic systems", "MCP", "LangChain", "Evals"],
+      items: ["RAG", "Agentic systems"],
     },
     {
       label: "Frontend",
@@ -256,21 +256,21 @@ export const profile: Profile = {
     },
     {
       label: "Infra / tools",
-      items: ["Docker", "Kubernetes", "GitHub Actions", "Linux"],
+      items: ["Docker", "GitHub Actions", "Linux"],
     },
   ],
   certifications: [
     {
-      name: "[Certification name]",
-      issuer: "[Issuer]",
-      year: "[2026]",
-      href: "https://example.com/verify",
+      name: "Web Developer Bootcamp",
+      issuer: "Udemy",
+      year: "[2025]",
+      href: "https://www.udemy.com/certificate/UC-c9f61370-4393-4738-a144-00318cd9aa5e/",
     },
     {
-      name: "[Certification name]",
-      issuer: "[Issuer]",
-      year: "[2025]",
-      href: "https://example.com/verify",
+      name: "Next.js App Router",
+      issuer: "Vercel",
+      year: "[2026]",
+      href: "https://drive.google.com/file/d/1ALzdZK0L7-p5UoNiUiiZjjE-Xg1lxSlO/view?usp=sharing",
     },
   ],
   repos: [
@@ -294,9 +294,9 @@ export const profile: Profile = {
     },
   ],
   contact: {
-    lede: "Have a role in mind, or a system that needs building?",
-    copy: "Email is the fastest way to reach me. I am happy to talk through backend architecture, agentic systems, or the unglamorous parts of making them reliable.",
-    cta: "Email Gaurav",
+    lede: "Have a role in mind, or a anything to discuss?",
+    copy: "Email is the fastest way to reach me. I am happy to discuss about collabrations and contributions.",
+    cta: "Email Me",
     subject: "Hello from your portfolio",
   },
 };

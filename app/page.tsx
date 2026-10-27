@@ -31,11 +31,11 @@ export default function Home() {
       <main id="main-content" className="frame" tabIndex={-1}>
         <Hero />
         <Now />
-        <Experience />
+        {/*<Experience />*/}
         <Projects />
         <Skills />
         <Certifications />
-        <OpenSource />
+        {/*<OpenSource />*/}
         <Contact />
       </main>
       <SiteFooter />
