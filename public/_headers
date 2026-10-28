@@ -1,0 +1,6 @@
+# Static export emits the metadata images without a file extension, so set
+# their content type explicitly for Cloudflare Pages.
+/opengraph-image
+  Content-Type: image/png
+/twitter-image
+  Content-Type: image/png
