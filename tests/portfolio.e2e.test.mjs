@@ -107,11 +107,10 @@ test("renders one h1 and all sections in the approved order", async () => {
     assert.deepEqual(sections, [
       "intro",
       "now",
-      "experience",
       "projects",
       "skills",
       "certifications",
-      "open-source",
+      "github-activity",
       "contact",
     ]);
   } finally {

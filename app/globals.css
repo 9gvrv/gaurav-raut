@@ -715,6 +715,32 @@ button {
   flex: none;
 }
 
+/* GitHub activity */
+
+.github-calendar {
+  max-width: 100%;
+  /* The calendar itself scrolls horizontally inside the component's own
+     scroll container on narrow screens; the page never scrolls sideways. */
+}
+
+.github-calendar .react-activity-calendar {
+  color: var(--muted);
+  font-family: var(--font-mono);
+}
+
+.github-calendar .react-activity-calendar__scroll-container {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+/* The only plain <div> child is the error state of the calendar. */
+.github-calendar > div {
+  padding-block: 2px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+}
+
 /* Contact */
 
 .contact-lede {
@@ -866,4 +892,20 @@ button {
   .page-fade {
     animation: none !important;
   }
+}
+
+/* Contribution tooltips render in a portal outside .github-calendar, so they
+   need to be themed globally. The html prefix keeps these rules ahead of the
+   component library's own stylesheet regardless of CSS import order. */
+html .react-activity-calendar__tooltip,
+html .react-activity-calendar__tooltip[data-color-scheme="dark"],
+html .react-activity-calendar__tooltip[data-color-scheme="light"] {
+  padding: 4px 7px;
+  border: 1px solid var(--line-strong);
+  border-radius: 3px;
+  background-color: var(--ink);
+  color: var(--bg);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.45;
 }
