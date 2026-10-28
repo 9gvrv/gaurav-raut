@@ -1,6 +1,7 @@
 import { Certifications } from "@/components/certifications";
 import { Contact } from "@/components/contact";
 import { Experience } from "@/components/experience";
+import { GithubActivity } from "@/components/github-activity";
 import { Hero } from "@/components/hero";
 import { Now } from "@/components/now";
 import { OpenSource } from "@/components/open-source";
@@ -35,6 +36,7 @@ export default function Home() {
         <Projects />
         <Skills />
         <Certifications />
+        <GithubActivity />
         {/*<OpenSource />*/}
         <Contact />
       </main>
