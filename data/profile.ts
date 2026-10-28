@@ -4,8 +4,8 @@
  * This file is scaffolded. Values wrapped in [SQUARE BRACKETS] are explicit
  * placeholders: employment history, project names, links, dates, outcomes and
  * certifications are examples, not claims. Replace them before publishing.
- * The `email` and `siteUrl` constants below are also placeholders; every
- * mailto link, metadata URL, sitemap entry and robots rule derives from them.
+ * The `email` and `siteUrl` constants below are used as-is: every mailto
+ * link, metadata URL, sitemap entry and robots rule derives from them.
  */
 
 export type SocialIcon = "github" | "linkedin" | "x" | "mail";
@@ -90,7 +90,7 @@ const email = "gauravraut9124@gmail.com";
  * Canonical site origin. Trailing slashes are stripped when the profile is
  * built, so metadata, sitemap and robots URLs never contain a double slash.
  */
-const siteUrl = "https://example.com";
+const siteUrl = "https://gaurav-raut.pages.dev";
 
 export const profile: Profile = {
   name: "Gaurav Raut",
@@ -169,7 +169,7 @@ export const profile: Profile = {
         "RAGNest lets users upload, organize, and query documents within shared workspaces to get relevant, context-aware answers grounded in their documents.",
       stack: ["Python", "FastAPI", "PostgreSQL", "TypeScript", "Next.js", "Docker"],
       architecture:
-        "FastAPI control plane / worker queue / Postgres event log / MCP tool adapters",
+        "FastAPI API / multi-tenant Postgres document store / Next.js client / Docker",
       links: [
         { label: "Live site", href: "https://example.com" },
         {
@@ -187,7 +187,7 @@ export const profile: Profile = {
         "Organize tasks into boards and lists, manage workflows, and plan projects efficiently with drag-and-drop functionality.",
       stack: ["TypeScript", "Next.js", "Express.js", "PostgreSQL"],
       architecture:
-        "Ingest -> chunk -> hybrid retrieval -> judged evals; results stored per commit",
+        "Next.js drag-and-drop client / Express REST API / Postgres boards + tasks",
       links: [
         { label: "Live site", href: "https://example.com" },
         {
@@ -205,7 +205,7 @@ export const profile: Profile = {
         "Track URLs, trigger health checks, measure response latency, identify failures, and review historical uptime data.",
       stack: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy"],
       architecture:
-        "Node services behind a typed gateway; OpenAPI as the shared contract",
+        "FastAPI health-check service / SQLAlchemy on Postgres / latency + uptime history per target",
       links: [
         {
           label: "Source",
@@ -222,7 +222,7 @@ export const profile: Profile = {
         "Research by searching the web when needed, processing relevant sources, and generating structured, LLM-powered answers with citations.",
       stack: ["Python", "SearXNG", "web scraping", "openai"],
       architecture:
-        "Next.js App Router / server components / Postgres read models",
+        "SearXNG metasearch / scraped-source pipeline / OpenAI synthesis with citations",
       links: [
         { label: "Live site", href: "https://example.com" },
         {
